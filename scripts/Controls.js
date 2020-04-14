@@ -1,24 +1,7 @@
-"use strict";
-// @ts-check
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * Элементы управления калькулятором.
- */
 class Controls {
-    /**
-     * Элементы управления калькулятором.
-     *
-     * @param {Calculator} calculator Связанный калькулятор.
-     * @param {NodeList} buttons Элементы управления.
-     */
     constructor(calculator, buttons) {
-        /** @type {Calculator} */
         this.calculator = calculator;
-        /** @type {NodeList} */
         this.buttons = buttons;
-        /**
-         * @param {Event} event
-         */
         const onButtonClick = (event) => {
             const target = event.target;
             const action = target.dataset.action;
@@ -29,12 +12,6 @@ class Controls {
             button.addEventListener('click', onButtonClick);
         }
     }
-    /**
-     * Выполняет указанное действие.
-     *
-     * @param {string} action Выполняемое действие.
-     * @param {string} [value] Значение для действия.
-     */
     doAction(action, value) {
         switch (action) {
             case 'addition':
@@ -78,5 +55,5 @@ class Controls {
         }
     }
 }
-exports.default = Controls;
+export { Controls as default, };
 //# sourceMappingURL=Controls.js.map

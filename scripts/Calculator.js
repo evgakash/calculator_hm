@@ -1,10 +1,3 @@
-"use strict";
-// @ts-check
-Object.defineProperty(exports, "__esModule", { value: true });
-//type Display= import( './Display' ).default;
-/**
- * Возможные значения текущей операции.
- */
 const Operation = {
     NONE: 0,
     ADDITION: 1,
@@ -12,23 +5,15 @@ const Operation = {
     MULTIPLICATION: 3,
     DIVISION: 4,
 };
-/**
- * Калькулятор.
- */
 class Calculator {
-    /**
-     * Калькулятор.
-     *
-     * @param  display Экран для отображения результата.
-     */
     constructor(display) {
-        /** @type  */
+        this.operation = 0;
+        this.numberA = 0;
+        this.numberB = 0;
+        this.value = '';
         this.display = display;
         this.clear();
     }
-    /**
-     * Сбрасывает состояние калькулятора.
-     */
     clear() {
         this.operation = Operation.NONE;
         this.numberA = 0;
@@ -36,9 +21,6 @@ class Calculator {
         this.value = '';
         this.display.setValue('0');
     }
-    /**
-     * Удаляет последний символ.
-     */
     backspace() {
         this.value = this.value.slice(0, -1);
         if (this.value.length === 0) {
@@ -48,9 +30,6 @@ class Calculator {
             this.display.setValue(this.value);
         }
     }
-    /**
-     * Обновляет отображаемое значение.
-     */
     updateDisplay() {
         let numberToDisplay;
         if (isNaN(this.numberA)) {
@@ -64,9 +43,6 @@ class Calculator {
         }
         this.display.setValue(this.display.prepare(numberToDisplay));
     }
-    /**
-     * Выполняет вычисление текущего значения, если необходимо.
-     */
     calculate() {
         let numberA = this.numberA;
         const numberB = this.numberB;
@@ -99,11 +75,6 @@ class Calculator {
         this.value = '';
         this.updateDisplay();
     }
-    /**
-     * Добавляет новую цифру к значению калькулятора.
-     *
-     * @param value Добавляемая цифра.
-     */
     addDigit(value) {
         if (!/^\d$/.test(value)) {
             throw new Error(`Incorrect number value "${value}".`);
@@ -126,9 +97,6 @@ class Calculator {
             this.numberB = Number(this.value);
         }
     }
-    /**
-     * Ставит десятичный разделитель.
-     */
     period() {
         if (this.value.indexOf('.') === -1) {
             this.value += ((this.value.length === 0)
@@ -137,9 +105,6 @@ class Calculator {
             this.display.setValue(this.value);
         }
     }
-    /**
-     * Изменяет знак числа.
-     */
     changeSign() {
         if (!this.value
             && this.numberA) {
@@ -162,42 +127,27 @@ class Calculator {
             this.numberB = Number(this.value);
         }
     }
-    /**
-     * Вычисляет квадратный корень.
-     */
     squareRoot() {
         this.calculate();
         this.numberA = Math.sqrt(this.numberA);
         this.updateDisplay();
     }
-    /**
-     * Выполняет сложение.
-     */
     addition() {
         this.calculate();
         this.operation = Operation.ADDITION;
     }
-    /**
-     * Выполняет вычитание.
-     */
     subtraction() {
         this.calculate();
         this.operation = Operation.SUBTRACTION;
     }
-    /**
-     * Выполняет умножение.
-     */
     multiplication() {
         this.calculate();
         this.operation = Operation.MULTIPLICATION;
     }
-    /**
-     * Выполняет деление.
-     */
     division() {
         this.calculate();
         this.operation = Operation.DIVISION;
     }
 }
-exports.default = Calculator;
+export { Calculator as default, };
 //# sourceMappingURL=Calculator.js.map

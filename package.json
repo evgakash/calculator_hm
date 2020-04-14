@@ -4,6 +4,7 @@
   "description": "Server example",
   "main": "script/index.js",
   "scripts": {
+    "tsc": "tsc",
     "tsc:w": "tsc -w"
   },
   "repository": {
